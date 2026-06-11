@@ -1,11 +1,23 @@
 import streamlit as st
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
 
 st.title("User Behavior Prediction App 🚀")
 
 # load data
 data = pd.read_csv("data/user_data.csv")
+st.subheader("User Behavior Visualization")
+
+fig, ax = plt.subplots()
+
+ax.scatter(data["time_spent"], data["clicks"])
+
+ax.set_xlabel("Time Spent")
+ax.set_ylabel("Clicks")
+ax.set_title("Time vs Clicks")
+
+st.pyplot(fig)
 
 X = data[["time_spent", "clicks", "scroll_depth"]]
 y = data["purchase"]
